@@ -29,8 +29,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo apt-get update
     sudo apt-get install -y curl openssh-server ca-certificates
 
-    # sudo apt-get install gitlab-ce=12.9.3-ce.0
-
     debconf-set-selections <<< "postfix postfix/mailname string $HOSTNAME"
     debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y postfix
@@ -39,6 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         wget --content-disposition -O /vagrant/ubuntu-bionic-gitlab-ce_12.9.3-ce.0_amd64.deb https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/bionic/gitlab-ce_12.9.3-ce.0_amd64.deb/download.deb
     fi
     sudo dpkg -i /vagrant/ubuntu-bionic-gitlab-ce_12.9.3-ce.0_amd64.deb
+
     sudo gitlab-ctl reconfigure
   SHELL
 end
